@@ -55,7 +55,19 @@ export default function Buy({ itemID }) {
             setLoading(false);
         }
     };
-
+    useEffect(() => {
+        // Check if this address already has already purchased this item
+        // If so, fetch the item and set paid to true
+        // Async function to avoid blocking the UI
+        async function checkPurchased() {
+          const purchased = await hasPurchased(publicKey, itemID);
+          if (purchased) {
+            setStatus(STATUS.Paid);
+            console.log("Address has already purchased this item!");
+          }
+        }
+        checkPurchased();
+      }, [publicKey, itemID]);
     useEffect(() => {
         // Check if transaction was confirmed
         if (status === STATUS.Submitted) {
