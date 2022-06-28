@@ -2,10 +2,19 @@
   {
     "id": 1,
     "name": "Derin Bartan",
-    "price": "49.19",
+    "price": "29.19",
     "description": "Get this back & white drawing from Bodrum based aertist!",
     "image_url": "derinbartan.png",
     "filename": "Emojis.zip",
     "hash": "QmWWH69mTL66r3H8P4wUn24t1L5pvdTJGUTKBqT11KCHS5"
+  },
+  {
+    "id": 2,
+    "name": "Rodeo",
+    "price": "30.09",
+    "image_url": "Rodeo.png",
+    "description": "Rodeo",
+    "filename": "Rodeo.png",
+    "hash": "QmTo7Dm7cUxapdkC9Tab85saX9jM4DhW6ox8ndwsdfxhQJ"
   }
 ]

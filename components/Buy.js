@@ -4,8 +4,7 @@ import { findReference, FindReferenceError } from '@solana/pay';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { InfinitySpin } from 'react-loader-spinner';
 import IPFSDownload from './IpfsDownload';
-import { addOrder } from '../lib/api';
-
+import { addOrder,hasPurchased,fetchItem } from '../lib/api';
 const STATUS = {
     Initial: 'Initial',
     Submitted: 'Submitted',
@@ -16,7 +15,7 @@ export default function Buy({ itemID }) {
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
     const orderID = useMemo(() => Keypair.generate().publicKey, []); // Public key used to identify the order
-
+    const [item, setItem] = useState(null); 
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState(STATUS.Initial); // Tracking transaction status
 
@@ -63,7 +62,8 @@ export default function Buy({ itemID }) {
           const purchased = await hasPurchased(publicKey, itemID);
           if (purchased) {
             setStatus(STATUS.Paid);
-            console.log("Address has already purchased this item!");
+            const item = await fetchItem(itemID);
+            setItem(item);
           }
         }
         checkPurchased();
